@@ -22,6 +22,6 @@ public class TestProfileConfig implements CommandLineRunner {
         User firstUser = new User("Higor Teste 1", "higor@gmail.com", "999999999", "123456");
         User secondUser = new User("Higor Teste 2", "higor@gmail.com", "999999999", "123456");
 
-        userRepository.saveAll(Arrays.asList(firstUser, secondUser));
+        this.userRepository.saveAll(Arrays.asList(firstUser, secondUser));
     }
 }
