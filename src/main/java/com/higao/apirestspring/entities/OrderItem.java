@@ -1,5 +1,6 @@
 package com.higao.apirestspring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.higao.apirestspring.entities.pk.OrderItemPK;
 
 import javax.persistence.EmbeddedId;
@@ -15,7 +16,7 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUI = 1L;
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private int quantity;
     private double price;
 
@@ -45,6 +46,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return this.id.getOrder();
     }
