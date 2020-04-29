@@ -1,14 +1,8 @@
 package com.higao.apirestspring.config;
 
-import com.higao.apirestspring.entities.Category;
-import com.higao.apirestspring.entities.Order;
-import com.higao.apirestspring.entities.Product;
-import com.higao.apirestspring.entities.User;
+import com.higao.apirestspring.entities.*;
 import com.higao.apirestspring.entities.enums.OrderStatus;
-import com.higao.apirestspring.repositories.CategoryRepository;
-import com.higao.apirestspring.repositories.OrderRepository;
-import com.higao.apirestspring.repositories.ProductRepository;
-import com.higao.apirestspring.repositories.UserRepository;
+import com.higao.apirestspring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +27,8 @@ public class TestProfileConfig implements CommandLineRunner {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -67,5 +63,13 @@ public class TestProfileConfig implements CommandLineRunner {
 
         this.userRepository.saveAll(Arrays.asList(firstUser, secondUser));
         this.orderRepository.saveAll(Arrays.asList(firstOrder, secondOrder, thirdOrder));
+
+        OrderItem oi1 = new OrderItem(firstOrder, p1, 2, p1.getPrice());
+        OrderItem oi5 = new OrderItem(firstOrder, p4, 2, p4.getPrice());
+        OrderItem oi2 = new OrderItem(secondOrder, p2, 1, p2.getPrice());
+        OrderItem oi3 = new OrderItem(thirdOrder, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(firstOrder, p4, 5, p4.getPrice());
+
+        this.orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5));
     }
 }
