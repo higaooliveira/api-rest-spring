@@ -71,5 +71,10 @@ public class TestProfileConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(firstOrder, p4, 5, p4.getPrice());
 
         this.orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5));
+
+        Payment payment1 = new Payment(null, Instant.parse("2019-06-20T21:53:07|"), firstOrder);
+        firstOrder.setPayment(payment1);
+
+        this.orderRepository.save(firstOrder);
     }
 }
