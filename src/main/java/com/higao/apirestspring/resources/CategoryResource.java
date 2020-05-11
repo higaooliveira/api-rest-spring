@@ -22,13 +22,13 @@ public class CategoryResource {
 
     @GetMapping(value="/categories")
     public ResponseEntity<List<Category>> findAllUsers(){
-        List<Category> categoryList = categoryService.findAll();
+        List<Category> categoryList = this.categoryService.findAll();
         return ResponseEntity.ok().body(categoryList);
     }
 
     @GetMapping(value="/category/{id}")
     public ResponseEntity<Category> findById(@PathVariable Long id){
-        Category category = categoryService.findById(id);
+        Category category = this.categoryService.findById(id);
 
         return ResponseEntity.ok().body(category);
     }
