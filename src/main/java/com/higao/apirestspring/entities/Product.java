@@ -29,6 +29,9 @@ public class Product implements Serializable {
 
     private Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> soldInOrders = new HashSet<>();
+
     public Product() {}
 
     public Product(Long id, String name, String description, double price, String imgUrl) {
@@ -83,6 +86,16 @@ public class Product implements Serializable {
         return categories;
     }
 
+    @JsonIgnore
+    public Set<Order> getOrders(){
+        Set<Order> orders = new HashSet<>();
+
+        for(OrderItem item: this.soldInOrders){
+            orders.add(item.getOrder());
+        }
+
+        return orders;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
