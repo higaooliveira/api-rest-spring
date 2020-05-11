@@ -24,4 +24,12 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         return user.get();
     }
+
+    public User create(User user){
+        return this.userRepository.save(user);
+    }
+
+    public void delete(Long id){
+        this.userRepository.deleteById(id);
+    }
 }
