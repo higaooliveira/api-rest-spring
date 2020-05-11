@@ -74,6 +74,12 @@ public class User implements Serializable {
 
     public List<Order> getOrderList() { return this.orderList; }
 
+    public void updateData(User user) {
+        this.setName(user.getName());
+        this.setEmail(user.getEmail());
+        this.setPhone(user.getPhone());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,4 +92,5 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

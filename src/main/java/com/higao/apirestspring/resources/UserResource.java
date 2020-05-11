@@ -40,6 +40,12 @@ public class UserResource {
                 .toUri();
         return ResponseEntity.created(uri).body(user);
     }
+    @PutMapping(value="/user/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
+        user = this.userService.update(id, user);
+
+        return ResponseEntity.ok().body(user);
+    }
 
     @DeleteMapping(value="/user/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
