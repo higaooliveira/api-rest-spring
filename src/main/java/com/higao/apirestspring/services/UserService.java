@@ -2,8 +2,12 @@ package com.higao.apirestspring.services;
 
 import com.higao.apirestspring.entities.User;
 import com.higao.apirestspring.repositories.UserRepository;
+import com.higao.apirestspring.services.exceptions.DatabaseException;
 import com.higao.apirestspring.services.exceptions.ResourceNotFoundException;
+import org.hibernate.dialect.Database;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +42,12 @@ public class UserService {
         return this.userRepository.save(entity);
     }
     public void delete(Long id){
-        this.userRepository.deleteById(id);
+        try {
+            this.userRepository.deleteById(id);
+        }catch(EmptyResultDataAccessException ex){
+            throw new ResourceNotFoundException(id);
+        }catch(DataIntegrityViolationException ex){
+            throw new DatabaseException(ex.getMessage());
+        }
     }
 }
