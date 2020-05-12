@@ -25,12 +25,12 @@ public class StandardError implements Serializable {
         this.path = path;
     }
 
-    public Instant getTimestap() {
+    public Instant getTimestamp() {
         return this.timestamp;
     }
 
-    public void setTimestap(Instant timestap) {
-        this.timestamp = timestap;
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Integer getStatus() {
