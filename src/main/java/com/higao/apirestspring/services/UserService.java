@@ -2,6 +2,7 @@ package com.higao.apirestspring.services;
 
 import com.higao.apirestspring.entities.User;
 import com.higao.apirestspring.repositories.UserRepository;
+import com.higao.apirestspring.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> user = userRepository.findById(id);
-        return user.get();
+        return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User create(User user){
