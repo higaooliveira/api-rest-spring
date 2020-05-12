@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,11 +36,13 @@ public class UserService {
     }
 
     public User update(Long id, User user){
-        User entity = this.userRepository.getOne(id);
-
-        entity.updateData(user);
-
-        return this.userRepository.save(entity);
+        try {
+            User entity = this.userRepository.getOne(id);
+            entity.updateData(user);
+            return this.userRepository.save(entity);
+        }catch (EntityNotFoundException ex){
+            throw new ResourceNotFoundException(id);
+        }
     }
     public void delete(Long id){
         try {
